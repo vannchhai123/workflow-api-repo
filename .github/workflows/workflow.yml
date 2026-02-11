@@ -21,8 +21,8 @@ jobs:
       - name: Build and Push
         run: mvn compile jib:build
         env:
-          JIB_TO_AUTH_USERNAME: ${{github.actor}}
-          JIB_TO_AUTH_PASSWORD: ${{secrets.GITHUB_TOKEN}}
+          GITHUB_USERNAME: ${{github.actor}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - run: curl -X POST ${{secrets.RAILWAY_WEBHOOK}}
 
 

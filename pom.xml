@@ -104,6 +104,10 @@
 					</from>
 					<to>
 						<image>ghcr.io/${github.username}/${project.artifactId}</image>
+						<auth>
+							<username>${env.GITHUB_USERNAME}</username>
+							<password>${env.GITHUB_TOKEN}</password>
+						</auth>
 						<tags>
 							<tag>latest</tag>
 							<tag>${project.version}</tag>
