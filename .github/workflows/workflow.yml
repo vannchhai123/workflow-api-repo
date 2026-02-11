@@ -1,0 +1,28 @@
+name: Spring Boot CI/CD
+on:
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build and Push
+        run: mvn compile jib:build
+        env:
+          JIB_TO_AUTH_USERNAME: ${{github.actor}}
+          JIB_TO_AUTH_PASSWORD: ${{secrets.GITHUB_TOKEN}}
+      - run: curl -X POST ${{secrets.RAILWAY_WEBHOOK}}
+
+
