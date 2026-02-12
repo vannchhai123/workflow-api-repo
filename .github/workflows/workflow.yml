@@ -19,7 +19,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build and Push
-        run: mvn -B package jib:build
+        run: mvn compile jib:build
         env:
           GITHUB_USERNAME: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
