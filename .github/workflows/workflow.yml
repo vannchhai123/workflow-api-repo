@@ -19,10 +19,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Build and Push
-        run: mvn compile jib:build
+        run: mvn -B package jib:build
         env:
-          GITHUB_USERNAME: vannchhai123
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - run: curl -X POST ${{secrets.RAILWAY_WEBHOOK}}
+          GITHUB_USERNAME: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
 
 
