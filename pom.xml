@@ -103,17 +103,13 @@
 					</from>
 					<to>
 						<image>ghcr.io/vannchhai123/${project.artifactId}</image>
-						<auth>
-							<username>${env.GITHUB_USERNAME}</username>
-							<password>${env.GITHUB_TOKEN}</password>
-						</auth>
 						<tags>
 							<tag>latest</tag>
 							<tag>${project.version}</tag>
 						</tags>
 					</to>
 					<container>
-						<ports><port>8080</port></ports>
+						<ports><port>8090</port></ports>
 					</container>
 				</configuration>
 			</plugin>
