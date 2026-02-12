@@ -18,6 +18,11 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
+      - name: Debug Info
+        run: |
+          echo "Actor: ${{ github.actor }}"
+          echo "Repository: ${{ github.repository }}"
+
       - name: Build and Push with Jib
         run: mvn compile jib:build
         env:
