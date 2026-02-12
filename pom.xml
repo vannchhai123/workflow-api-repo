@@ -28,7 +28,6 @@
 	</scm>
 	<properties>
 		<java.version>21</java.version>
-		<github.username>vannchhai123</github.username>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -103,11 +102,9 @@
 						<image>eclipse-temurin:21-jre-alpine</image>
 					</from>
 					<to>
-						<image>ghcr.io/${github.username}/${project.artifactId}</image>
+						<image>ghcr.io/vannchhai123/${project.artifactId}</image>
 						<auth>
-							<!--suppress UnresolvedMavenProperty -->
 							<username>${env.GITHUB_USERNAME}</username>
-							<!--suppress UnresolvedMavenProperty -->
 							<password>${env.GITHUB_TOKEN}</password>
 						</auth>
 						<tags>

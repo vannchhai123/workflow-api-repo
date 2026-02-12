@@ -18,11 +18,12 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build and Push
-        run: mvn compile jib:build
-        env:
-          GITHUB_USERNAME: ${{ github.actor }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and Push with Jib
+        run: |
+          mvn clean compile jib:build \
+            -Djib.to.image=ghcr.io/vannchhai123/workflow-api:latest \
+            -Djib.to.auth.username=${{ github.actor }} \
+            -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}
 
       - run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
 
