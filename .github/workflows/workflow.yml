@@ -4,13 +4,12 @@ on:
     branches: [main]
   workflow_dispatch:
 
-permissions:
-  contents: read
-  packages: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
 
@@ -23,7 +22,7 @@ jobs:
         run: mvn compile jib:build
         env:
             JIB_TO_USERNAME: ${{ github.actor }}
-            JIB_TO_PASSWORD: ${{ secrets.GHCR_TOKEN }}
+            JIB_TO_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
       - run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
 
