@@ -23,11 +23,11 @@ jobs:
           echo "Actor: ${{ github.actor }}"
           echo "Repository: ${{ github.repository }}"
           echo "Token: ${{ secrets.GITHUB_TOKEN }}"
+          
 
       - name: Build and Push with Jib
         run: mvn compile jib:build
         env:
-
             JIB_TO_USERNAME: ${{ github.actor }}
             JIB_TO_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
