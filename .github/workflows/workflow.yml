@@ -24,20 +24,14 @@ jobs:
           echo "Repository: ${{ github.repository }}"
           echo "Token: ${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Verify Jib env variables
+      - name: Build and Push with Jib
         run: |
           echo "JIB_TO_USERNAME is set: ${JIB_TO_USERNAME:+YES}"
-          if [ -z "$JIB_TO_PASSWORD" ]; then
-            echo "JIB_TO_PASSWORD is not set"
-          else
-            echo "JIB_TO_PASSWORD is set"
-          fi
-
-      - name: Build and Push with Jib
-        run: mvn compile jib:build
+          echo "JIB_TO_PASSWORD is set: ${JIB_TO_PASSWORD:+YES}"
+          mvn compile jib:build
         env:
-            JIB_TO_USERNAME: ${{ github.actor }}
-            JIB_TO_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          JIB_TO_USERNAME: ${{ github.actor }}
+          JIB_TO_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
 
 
