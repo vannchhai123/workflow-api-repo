@@ -24,9 +24,9 @@ jobs:
           java-version: '21'
           cache: maven
 
-      - name: Verify GHCR Login
-        run: |
-          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u vannchhai123 --password-stdin
+#      - name: Verify GHCR Login
+#        run: |
+#          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u vannchhai123 --password-stdin
 
       - name: Build and Push Image (Jib)
         run: mvn -B compile jib:build
