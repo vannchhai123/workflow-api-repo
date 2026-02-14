@@ -30,7 +30,7 @@ jobs:
       - name: Build & Push with Jib
         run: mvn -B -X compile jib:build
         env:
-          JIB_TO_AUTH_USERNAME: vannchhai123
+          JIB_TO_AUTH_USERNAME: ${{ github.actor }}
           JIB_TO_AUTH_PASSWORD: ${{ secrets.GHCR_TOKEN }}
 
       - name: Deploy
