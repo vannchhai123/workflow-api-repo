@@ -14,27 +14,26 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout source
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Java 21
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
           cache: maven
 
-      - name: Show debug info
+      - name: Verify GHCR Login
         run: |
-          echo "Actor: ${{ github.actor }}"
-          echo "Repository: ${{ github.repository }}"
+          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u vannchhai123 --password-stdin
 
-      - name: Build + Push Container with Jib
-        run: mvn -B -e compile jib:build
+      - name: Build and Push Image (Jib)
+        run: mvn -B compile jib:build
         env:
           JIB_TO_AUTH_USERNAME: vannchhai123
           JIB_TO_AUTH_PASSWORD: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Trigger Railway Deploy
+      - name: Trigger Deploy
         if: success()
         run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
