@@ -22,17 +22,9 @@ jobs:
           java-version: '21'
           cache: maven
 
-      # 🔍 HARD PROOF STEP — DO NOT REMOVE
-      - name: Test GHCR Login
-        run: |
-          echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u vannchhai123 --password-stdin
-
       - name: Build & Push with Jib
-        run: mvn -B -X compile jib:build
+        run: mvn compile jib:build
         env:
           JIB_TO_AUTH_USERNAME: ${{ github.actor }}
           JIB_TO_AUTH_PASSWORD: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Deploy
-        if: success()
-        run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
