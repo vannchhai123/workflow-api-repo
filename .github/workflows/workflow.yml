@@ -23,7 +23,7 @@ jobs:
           cache: maven
 
       - name: Build & Push with Jib
-        run: mvn compile jib:build
+        run: mvn -X compile jib:build
         env:
           JIB_TO_AUTH_USERNAME: ${{ github.actor }}
           JIB_TO_AUTH_PASSWORD: ${{ secrets.GHCR_TOKEN }}
