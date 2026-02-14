@@ -34,4 +34,9 @@ jobs:
           JIB_TO_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
       - run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
 
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
