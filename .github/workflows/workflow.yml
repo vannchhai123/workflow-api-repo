@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "Actor: ${{ github.actor }}"
           echo "Repository: ${{ github.repository }}"
-          echo "Token: ${{ secrets.GITHUB_TOKEN }}"
+          echo "Token: ${{ secrets.GHCR_TOKEN }}"
 
       - name: Build and Push with Jib
         run: |
@@ -31,7 +31,7 @@ jobs:
           mvn compile jib:build
         env:
           JIB_TO_AUTH_USERNAME: ${{ github.actor }}
-          JIB_TO_AUTH_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+          JIB_TO_AUTH_PASSWORD: ${{ secrets.GHCR_TOKEN }}
       - run: curl -X POST ${{ secrets.RAILWAY_WEBHOOK }}
 
 #  deploy:
